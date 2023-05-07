@@ -27,5 +27,5 @@ public class Message {
     @JoinColumn()
     private Person sender;
 
-    private String value;
+    private String content;
 }

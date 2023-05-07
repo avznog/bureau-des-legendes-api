@@ -45,7 +45,7 @@ public class MessageController {
         updateMessage.setDate(message.getDate());
         updateMessage.setAlert(message.getAlert());
         updateMessage.setSender(message.getSender());
-        updateMessage.setValue(message.getValue());
+        updateMessage.setContent(message.getContent());
 
         messageRepository.save(updateMessage);
 

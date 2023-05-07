@@ -6,8 +6,6 @@ import java.util.Collection;
 
 import com.bureaudeslegendes.api.enumList.Status;
 
-import jakarta.persistence.CascadeType;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -44,7 +42,6 @@ public class Alert implements Serializable {
 
     private Status status;
 
-    @OneToMany(mappedBy = "alert", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "alert")
     private Collection<Message> messages;
-
 }

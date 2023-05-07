@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.Data;
 
 @Data
@@ -21,11 +22,11 @@ public class Team implements Serializable {
 
     private String name;
 
-    @ManyToOne()
+    @OneToOne()
     @JoinColumn()
     private Person manager;
 
-    @ManyToOne()
+    @OneToOne
     @JoinColumn()
     private Person rh;
 

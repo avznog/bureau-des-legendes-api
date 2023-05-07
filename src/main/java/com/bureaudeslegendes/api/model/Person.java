@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.Data;
 
 @Data
@@ -39,11 +40,11 @@ public class Person implements Serializable {
 
     private String photo;
 
-    @OneToMany(mappedBy = "manager")
-    private Collection<Team> teamManagers;
+    @OneToOne(mappedBy = "manager")
+    private Team manager;
 
-    @OneToMany(mappedBy = "rh")
-    private Collection<Team> teamRHs;
+    @OneToOne(mappedBy = "rh")
+    private Team rh;
 
     @OneToMany(mappedBy = "members")
     private Collection<Team> teamMembers;
@@ -59,5 +60,4 @@ public class Person implements Serializable {
 
     @OneToMany(mappedBy = "creator")
     private Collection<FormTemplate> formTemplates;
-
 }

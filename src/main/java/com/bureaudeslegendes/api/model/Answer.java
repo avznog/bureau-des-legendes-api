@@ -1,7 +1,5 @@
 package com.bureaudeslegendes.api.model;
 
-import java.io.Serializable;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,7 +10,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Answer implements Serializable {
+public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

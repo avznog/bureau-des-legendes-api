@@ -1,6 +1,5 @@
 package com.bureaudeslegendes.api.model;
 
-import java.io.Serializable;
 import java.sql.Date;
 
 import jakarta.persistence.Entity;
@@ -13,7 +12,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Message implements Serializable {
+public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -1,6 +1,5 @@
 package com.bureaudeslegendes.api.model;
 
-import java.io.Serializable;
 import java.util.Collection;
 
 import com.bureaudeslegendes.api.enumList.Role;
@@ -17,7 +16,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Person implements Serializable {
+public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

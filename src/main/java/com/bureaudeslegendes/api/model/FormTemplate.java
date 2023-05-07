@@ -1,6 +1,5 @@
 package com.bureaudeslegendes.api.model;
 
-import java.io.Serializable;
 import java.sql.Date;
 import java.util.Collection;
 
@@ -17,7 +16,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class FormTemplate implements Serializable {
+public class FormTemplate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

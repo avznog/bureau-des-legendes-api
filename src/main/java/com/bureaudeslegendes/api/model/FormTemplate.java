@@ -6,7 +6,6 @@ import java.util.Collection;
 
 import com.bureaudeslegendes.api.enumList.Type;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,22 +19,19 @@ import lombok.Data;
 @Entity
 public class FormTemplate implements Serializable {
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "creationDate")
     private Date creationDate;
 
-    @Column(name = "type")
     private Type type;
 
     @ManyToOne()
-    @JoinColumn(name = "teamId")
+    @JoinColumn()
     private Team team;
 
     @ManyToOne()
-    @JoinColumn(name = "creatorId")
+    @JoinColumn()
     private Person creator;
 
     @OneToMany(mappedBy = "formTemplate")

@@ -5,7 +5,6 @@ import java.util.Collection;
 
 import com.bureaudeslegendes.api.enumList.Role;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,33 +18,25 @@ import lombok.Data;
 @Entity
 public class Person implements Serializable {
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "role")
     private Role role;
 
-    @Column(name = "firstname")
     private String firstName;
 
-    @Column(name = "lastName")
     private String lastName;
 
-    @Column(name = "email")
     private String email;
 
-    @Column(name = "password")
     private String password;
 
-    @Column(name = "phone")
     private String phone;
 
     @ManyToOne()
-    @JoinColumn(name = "teamId")
+    @JoinColumn()
     private Team team;
 
-    @Column(name = "photo")
     private String photo;
 
     @OneToMany(mappedBy = "manager")

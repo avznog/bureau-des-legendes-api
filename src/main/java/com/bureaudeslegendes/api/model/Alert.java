@@ -7,7 +7,7 @@ import java.util.Collection;
 import com.bureaudeslegendes.api.enumList.Status;
 
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,32 +21,27 @@ import lombok.Data;
 @Entity
 public class Alert implements Serializable {
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "creationDate")
     private Date creationDate;
 
     @ManyToOne()
-    @JoinColumn(name = "fillerId")
+    @JoinColumn()
     private Person filler;
 
     @ManyToOne()
-    @JoinColumn(name = "reviewerId")
+    @JoinColumn()
     private Person reviewer;
 
     @ManyToOne()
-    @JoinColumn(name = "formTemplateId")
+    @JoinColumn()
     private FormTemplate formTemplate;
 
-    @Column(name = "anonymous")
     private Boolean anonymous;
 
-    @Column(name = "sendMail")
     private Boolean sendMail;
 
-    @Column(name = "status")
     private Status status;
 
     @OneToMany(mappedBy = "alert", cascade = CascadeType.ALL)

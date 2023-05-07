@@ -3,7 +3,6 @@ package com.bureaudeslegendes.api.model;
 import java.io.Serializable;
 import java.sql.Date;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,21 +15,18 @@ import lombok.Data;
 @Entity
 public class Message implements Serializable {
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "date")
     private Date date;
 
     @ManyToOne()
-    @JoinColumn(name = "alertId")
+    @JoinColumn()
     private Alert alert;
 
     @ManyToOne()
-    @JoinColumn(name = "senderId")
+    @JoinColumn()
     private Person sender;
 
-    @Column(name = "value")
     private String value;
 }

@@ -2,7 +2,6 @@ package com.bureaudeslegendes.api.model;
 
 import java.io.Serializable;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,14 +14,12 @@ import lombok.Data;
 @Entity
 public class Answer implements Serializable {
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne()
-    @JoinColumn(name = "questionId")
+    @JoinColumn()
     private Question question;
 
-    @Column(name = "answer")
     private String answer;
 }

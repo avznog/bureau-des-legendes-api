@@ -42,7 +42,7 @@ public class Person implements Serializable {
     private String phone;
 
     @ManyToOne()
-    @JoinColumn(name = "teamId", referencedColumnName = "id")
+    @JoinColumn(name = "teamId")
     private Team team;
 
     @Column(name = "photo")

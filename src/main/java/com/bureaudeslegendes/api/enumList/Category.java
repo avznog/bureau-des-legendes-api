@@ -1,6 +1,6 @@
 package com.bureaudeslegendes.api.enumList;
 
-public enum Type {
+public enum Category {
     MOTIVOMETER,
     BURN_OUT,
     HARASSMENT,

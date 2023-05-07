@@ -43,7 +43,7 @@ public class FormTemplateController {
             @RequestBody FormTemplate formTemplate) {
         FormTemplate updateFormTemplate = formTemplateRepository.findById(id).orElseThrow(RuntimeException::new);
         updateFormTemplate.setCreationDate(formTemplate.getCreationDate());
-        updateFormTemplate.setType(formTemplate.getType());
+        updateFormTemplate.setCategory(formTemplate.getCategory());
         updateFormTemplate.setTeam(formTemplate.getTeam());
         updateFormTemplate.setCreator(formTemplate.getCreator());
 

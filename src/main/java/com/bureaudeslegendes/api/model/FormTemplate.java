@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.Collection;
 
-import com.bureaudeslegendes.api.enumList.Type;
+import com.bureaudeslegendes.api.enumList.Category;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,7 +24,7 @@ public class FormTemplate implements Serializable {
 
     private Date creationDate;
 
-    private Type type;
+    private Category category;
 
     @ManyToOne()
     @JoinColumn()

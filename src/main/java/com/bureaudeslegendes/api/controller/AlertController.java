@@ -3,7 +3,6 @@ package com.bureaudeslegendes.api.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,13 +32,12 @@ public class AlertController {
     }
 
     @PostMapping
-    public ResponseEntity<Alert> createAlert(@RequestBody Alert alert) {
-        alertRepository.save(alert);
-        return ResponseEntity.ok().build();
+    public Alert createAlert(@RequestBody Alert alert) {
+        return alertRepository.save(alert);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Alert> updateAlert(@PathVariable Long id, @RequestBody Alert alert) {
+    public Alert updateAlert(@PathVariable Long id, @RequestBody Alert alert) {
         Alert updateAlert = alertRepository.findById(id).orElseThrow(RuntimeException::new);
         updateAlert.setCreationDate(alert.getCreationDate());
         updateAlert.setFiller(alert.getFiller());
@@ -49,14 +47,11 @@ public class AlertController {
         updateAlert.setSendMail(alert.getSendMail());
         updateAlert.setStatus(alert.getStatus());
 
-        alertRepository.save(updateAlert);
-
-        return ResponseEntity.ok().build();
+        return alertRepository.save(updateAlert);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Alert> deleteAlert(@PathVariable Long id) {
+    public void deleteAlert(@PathVariable Long id) {
         alertRepository.deleteById(id);
-        return ResponseEntity.ok().build();
     }
 }

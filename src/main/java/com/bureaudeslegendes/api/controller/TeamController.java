@@ -3,7 +3,6 @@ package com.bureaudeslegendes.api.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,27 +32,23 @@ public class TeamController {
     }
 
     @PostMapping
-    public ResponseEntity<Team> createTeam(@RequestBody Team team) {
-        teamRepository.save(team);
-        return ResponseEntity.ok().build();
+    public Team createTeam(@RequestBody Team team) {
+        return teamRepository.save(team);
     }
 
-    // @PutMapping("/{id}")
-    // public ResponseEntity<Team> updateTeam(@PathVariable Long id, @RequestBody Team team) {
-    //     Team updateTeam = teamRepository.findById(id).orElseThrow(RuntimeException::new);
-    //     updateTeam.setName(team.getName());
-    //     updateTeam.setManager(team.getManager());
-    //     updateTeam.setRh(team.getRh());
-    //     updateTeam.setMembers(team.getMembers());
+    @PutMapping("/{id}")
+    public Team updateTeam(@PathVariable Long id, @RequestBody Team team) {
+        Team updateTeam = teamRepository.findById(id).orElseThrow(RuntimeException::new);
+        updateTeam.setName(team.getName());
+        updateTeam.setManager(team.getManager());
+        updateTeam.setRh(team.getRh());
+        updateTeam.setMembers(team.getMembers());
 
-    //     teamRepository.save(updateTeam);
-
-    //     return ResponseEntity.ok().build();
-    // }
+        return teamRepository.save(updateTeam);
+    }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Team> deleteTeam(@PathVariable Long id) {
+    public void deleteTeam(@PathVariable Long id) {
         teamRepository.deleteById(id);
-        return ResponseEntity.ok().build();
     }
 }

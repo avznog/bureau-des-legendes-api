@@ -3,7 +3,6 @@ package com.bureaudeslegendes.api.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,25 +32,22 @@ public class AnswerController {
     }
 
     @PostMapping
-    public ResponseEntity<Answer> createAnswer(@RequestBody Answer answer) {
-        answerRepository.save(answer);
-        return ResponseEntity.ok().build();
+    public Answer createAnswer(@RequestBody Answer answer) {
+        return answerRepository.save(answer);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Answer> updateAnswer(@PathVariable Long id, @RequestBody Answer answer) {
+    public Answer updateAnswer(@PathVariable Long id, @RequestBody Answer answer) {
         Answer updateAnswer = answerRepository.findById(id).orElseThrow(RuntimeException::new);
+        updateAnswer.setForm(answer.getForm());
         updateAnswer.setQuestion(answer.getQuestion());
         updateAnswer.setAnswer(answer.getAnswer());
 
-        answerRepository.save(updateAnswer);
-
-        return ResponseEntity.ok().build();
+        return answerRepository.save(updateAnswer);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Answer> deleteAnswer(@PathVariable Long id) {
+    public void deleteAnswer(@PathVariable Long id) {
         answerRepository.deleteById(id);
-        return ResponseEntity.ok().build();
     }
 }

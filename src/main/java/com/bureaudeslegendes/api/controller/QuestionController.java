@@ -3,7 +3,6 @@ package com.bureaudeslegendes.api.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,25 +32,21 @@ public class QuestionController {
     }
 
     @PostMapping
-    public ResponseEntity<Question> createQuestion(@RequestBody Question question) {
-        questionRepository.save(question);
-        return ResponseEntity.ok().build();
+    public Question createQuestion(@RequestBody Question question) {
+        return questionRepository.save(question);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Question> updateQuestion(@PathVariable Long id, @RequestBody Question question) {
+    public Question updateQuestion(@PathVariable Long id, @RequestBody Question question) {
         Question updateQuestion = questionRepository.findById(id).orElseThrow(RuntimeException::new);
         updateQuestion.setForm(question.getForm());
         updateQuestion.setQuestion(question.getQuestion());
 
-        questionRepository.save(updateQuestion);
-
-        return ResponseEntity.ok().build();
+        return questionRepository.save(updateQuestion);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Question> deleteQuestion(@PathVariable Long id) {
+    public void deleteQuestion(@PathVariable Long id) {
         questionRepository.deleteById(id);
-        return ResponseEntity.ok().build();
     }
 }

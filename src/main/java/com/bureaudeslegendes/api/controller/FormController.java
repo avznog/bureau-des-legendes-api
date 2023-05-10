@@ -3,7 +3,6 @@ package com.bureaudeslegendes.api.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bureaudeslegendes.api.model.Form;
 import com.bureaudeslegendes.api.repository.FormRepository;
 
-@RequestMapping("/forms")
+@RequestMapping("/form")
 @RestController
 public class FormController {
     @Autowired
@@ -33,28 +32,24 @@ public class FormController {
     }
 
     @PostMapping
-    public ResponseEntity<Form> createForm(@RequestBody Form form) {
-        formRepository.save(form);
-        return ResponseEntity.ok().build();
+    public Form createForm(@RequestBody Form formTemplate) {
+        return formRepository.save(formTemplate);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Form> updateForm(@PathVariable Long id,
-            @RequestBody Form form) {
+    public Form updateForm(@PathVariable Long id,
+            @RequestBody Form formTemplate) {
         Form updateForm = formRepository.findById(id).orElseThrow(RuntimeException::new);
-        updateForm.setCreationDate(form.getCreationDate());
-        updateForm.setType(form.getType());
-        updateForm.setTeam(form.getTeam());
-        updateForm.setCreator(form.getCreator());
+        updateForm.setCreationDate(formTemplate.getCreationDate());
+        updateForm.setType(formTemplate.getType());
+        updateForm.setTeam(formTemplate.getTeam());
+        updateForm.setCreator(formTemplate.getCreator());
 
-        formRepository.save(updateForm);
-
-        return ResponseEntity.ok().build();
+        return formRepository.save(updateForm);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Form> deleteForm(@PathVariable Long id) {
+    public void deleteForm(@PathVariable Long id) {
         formRepository.deleteById(id);
-        return ResponseEntity.ok().build();
     }
 }

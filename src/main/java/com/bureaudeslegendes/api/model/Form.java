@@ -38,4 +38,7 @@ public class Form {
 
     @OneToMany(mappedBy = "form")
     private Collection<Question> questions;
+
+    @OneToMany(mappedBy = "form")
+    private Collection<Answer> answers;
 }

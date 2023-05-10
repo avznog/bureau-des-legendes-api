@@ -19,5 +19,9 @@ public class Answer {
     @JoinColumn()
     private Question question;
 
+    @ManyToOne()
+    @JoinColumn()
+    private Form form;
+
     private String answer;
 }

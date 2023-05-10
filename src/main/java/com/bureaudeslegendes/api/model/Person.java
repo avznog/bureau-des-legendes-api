@@ -22,9 +22,9 @@ public class Person {
 
     private Role role;
 
-    private String firstName;
+    private String firstname;
 
-    private String lastName;
+    private String lastname;
 
     private String email;
 

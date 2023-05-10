@@ -42,8 +42,8 @@ public class PersonController {
     public ResponseEntity<Person> updatePerson(@PathVariable Long id, @RequestBody Person person) {
         Person updatePerson = personRepository.findById(id).orElseThrow(RuntimeException::new);
         updatePerson.setRole(person.getRole());
-        updatePerson.setFirstName(person.getFirstName());
-        updatePerson.setLastName(person.getLastName());
+        updatePerson.setFirstname(person.getFirstname());
+        updatePerson.setLastname(person.getLastname());
         updatePerson.setEmail(person.getEmail());
         updatePerson.setPassword(person.getPassword());
         updatePerson.setPhone(person.getPhone());

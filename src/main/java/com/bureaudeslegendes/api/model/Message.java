@@ -18,7 +18,9 @@ public class Message {
     private Long id;
 
     private Date date;
-
+    
+    private String content;
+    
     @ManyToOne()
     @JoinColumn()
     private Alert alert;
@@ -27,5 +29,4 @@ public class Message {
     @JoinColumn()
     private Person sender;
 
-    private String content;
 }

@@ -7,7 +7,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
@@ -25,17 +24,13 @@ public class Team {
     @JoinColumn()
     private Person manager;
 
-    @OneToOne
+    @OneToOne()
     @JoinColumn()
     private Person rh;
 
-    @ManyToOne()
-    @JoinColumn()
+    @OneToMany(mappedBy = "team")
     private Collection<Person> members;
 
     @OneToMany(mappedBy = "team")
-    private Collection<Person> people;
-
-    @OneToMany(mappedBy = "team")
-    private Collection<FormTemplate> formTemplates;
+    private Collection<Form> forms;
 }

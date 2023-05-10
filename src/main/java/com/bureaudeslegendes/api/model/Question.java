@@ -20,7 +20,7 @@ public class Question {
 
     @ManyToOne()
     @JoinColumn()
-    private FormTemplate formTemplate;
+    private Form form;
 
     private String question;
 

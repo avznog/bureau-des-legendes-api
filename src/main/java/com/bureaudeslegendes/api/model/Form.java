@@ -3,7 +3,7 @@ package com.bureaudeslegendes.api.model;
 import java.sql.Date;
 import java.util.Collection;
 
-import com.bureaudeslegendes.api.enumList.Category;
+import com.bureaudeslegendes.api.enumList.FormType;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,26 +16,26 @@ import lombok.Data;
 
 @Data
 @Entity
-public class FormTemplate {
+public class Form {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Date creationDate;
 
-    private Category category;
+    private FormType type;
 
+    @OneToMany(mappedBy = "form")
+    private Collection<Alert> alerts;
+    
     @ManyToOne()
     @JoinColumn()
     private Team team;
-
+    
     @ManyToOne()
     @JoinColumn()
     private Person creator;
 
-    @OneToMany(mappedBy = "formTemplate")
-    private Collection<Alert> alerts;
-
-    @OneToMany(mappedBy = "formTemplate")
+    @OneToMany(mappedBy = "form")
     private Collection<Question> questions;
 }

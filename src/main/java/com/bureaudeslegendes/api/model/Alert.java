@@ -17,30 +17,30 @@ import lombok.Data;
 @Data
 @Entity
 public class Alert {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    private Date creationDate;
+  private Date creationDate;
+  
+  private Boolean anonymous;
 
-    @ManyToOne()
-    @JoinColumn()
-    private Person filler;
+  private Boolean sendMail;
 
-    @ManyToOne()
-    @JoinColumn()
-    private Person reviewer;
+  private Status status;
 
-    @ManyToOne()
-    @JoinColumn()
-    private FormTemplate formTemplate;
+  @ManyToOne()
+  @JoinColumn()
+  private Person filler;
 
-    private Boolean anonymous;
+  @ManyToOne()
+  @JoinColumn()
+  private Person reviewer;
 
-    private Boolean sendMail;
+  @ManyToOne()
+  @JoinColumn()
+  private Form form;
 
-    private Status status;
-
-    @OneToMany(mappedBy = "alert")
-    private Collection<Message> messages;
+  @OneToMany(mappedBy = "alert")
+  private Collection<Message> messages;
 }

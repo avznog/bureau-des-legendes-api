@@ -11,7 +11,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import lombok.Data;
 
 @Data
@@ -33,30 +32,21 @@ public class Person {
 
     private String phone;
 
+    private String photo;
+    
     @ManyToOne()
     @JoinColumn()
     private Team team;
 
-    private String photo;
-
-    @OneToOne(mappedBy = "manager")
-    private Team manager;
-
-    @OneToOne(mappedBy = "rh")
-    private Team rh;
-
-    @OneToMany(mappedBy = "members")
-    private Collection<Team> teamMembers;
-
     @OneToMany(mappedBy = "filler")
-    private Collection<Alert> alertFillers;
+    private Collection<Alert> filledAlerts;
 
     @OneToMany(mappedBy = "reviewer")
-    private Collection<Alert> alertReviewers;
+    private Collection<Alert> reviewedAlerts;
 
     @OneToMany(mappedBy = "sender")
     private Collection<Message> messages;
 
     @OneToMany(mappedBy = "creator")
-    private Collection<FormTemplate> formTemplates;
+    private Collection<Form> forms;
 }

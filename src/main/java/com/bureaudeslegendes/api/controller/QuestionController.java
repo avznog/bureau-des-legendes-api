@@ -41,7 +41,7 @@ public class QuestionController {
     @PutMapping("/{id}")
     public ResponseEntity<Question> updateQuestion(@PathVariable Long id, @RequestBody Question question) {
         Question updateQuestion = questionRepository.findById(id).orElseThrow(RuntimeException::new);
-        updateQuestion.setFormTemplate(question.getFormTemplate());
+        updateQuestion.setForm(question.getForm());
         updateQuestion.setQuestion(question.getQuestion());
 
         questionRepository.save(updateQuestion);

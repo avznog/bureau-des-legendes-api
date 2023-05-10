@@ -38,18 +38,18 @@ public class TeamController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Team> updateTeam(@PathVariable Long id, @RequestBody Team team) {
-        Team updateTeam = teamRepository.findById(id).orElseThrow(RuntimeException::new);
-        updateTeam.setName(team.getName());
-        updateTeam.setManager(team.getManager());
-        updateTeam.setRh(team.getRh());
-        updateTeam.setMembers(team.getMembers());
+    // @PutMapping("/{id}")
+    // public ResponseEntity<Team> updateTeam(@PathVariable Long id, @RequestBody Team team) {
+    //     Team updateTeam = teamRepository.findById(id).orElseThrow(RuntimeException::new);
+    //     updateTeam.setName(team.getName());
+    //     updateTeam.setManager(team.getManager());
+    //     updateTeam.setRh(team.getRh());
+    //     updateTeam.setMembers(team.getMembers());
 
-        teamRepository.save(updateTeam);
+    //     teamRepository.save(updateTeam);
 
-        return ResponseEntity.ok().build();
-    }
+    //     return ResponseEntity.ok().build();
+    // }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Team> deleteTeam(@PathVariable Long id) {

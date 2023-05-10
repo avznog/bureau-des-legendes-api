@@ -44,7 +44,7 @@ public class AlertController {
         updateAlert.setCreationDate(alert.getCreationDate());
         updateAlert.setFiller(alert.getFiller());
         updateAlert.setReviewer(alert.getReviewer());
-        updateAlert.setFormTemplate(alert.getFormTemplate());
+        updateAlert.setForm(alert.getForm());
         updateAlert.setAnonymous(alert.getAnonymous());
         updateAlert.setSendMail(alert.getSendMail());
         updateAlert.setStatus(alert.getStatus());

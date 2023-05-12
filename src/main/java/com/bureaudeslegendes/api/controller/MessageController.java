@@ -12,44 +12,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bureaudeslegendes.api.dto.Message.MessageCreationDTO;
 import com.bureaudeslegendes.api.model.Message;
-import com.bureaudeslegendes.api.repository.MessageRepository;
+import com.bureaudeslegendes.api.service.MessageService;
 
 @RequestMapping("/messages")
 @RestController
 public class MessageController {
     @Autowired
-    private MessageRepository messageRepository;
+    private MessageService messageService;
 
     @GetMapping
     public List<Message> getMessages() {
-        return messageRepository.findAll();
+        return messageService.getMessages();
     }
 
     @GetMapping("/{id}")
     public Message getMessage(@PathVariable Long id) {
-        return messageRepository.findById(id).orElseThrow(RuntimeException::new);
+        return messageService.getMessage(id);
     }
 
     @PostMapping
-    public Message createMessage(@RequestBody Message message) {
-        return messageRepository.save(message);
+    public Message createMessage(@RequestBody MessageCreationDTO messageCreationDTO) {
+        return messageService.createMessage(messageCreationDTO);
     }
 
     @PutMapping("/{id}")
     public Message updateMessage(@PathVariable Long id,
-            @RequestBody Message message) {
-        Message updateMessage = messageRepository.findById(id).orElseThrow(RuntimeException::new);
-        updateMessage.setDate(message.getDate());
-        updateMessage.setAlert(message.getAlert());
-        updateMessage.setSender(message.getSender());
-        updateMessage.setContent(message.getContent());
-
-        return messageRepository.save(updateMessage);
+            @RequestBody MessageCreationDTO messageCreationDTO) {
+        return messageService.updateMessage(id, messageCreationDTO);
     }
 
     @DeleteMapping("/{id}")
     public void deleteMessage(@PathVariable Long id) {
-        messageRepository.deleteById(id);
+        messageService.deleteMessage(id);
     }
 }

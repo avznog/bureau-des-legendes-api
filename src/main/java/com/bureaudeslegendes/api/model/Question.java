@@ -18,11 +18,11 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String question;
+
     @ManyToOne()
     @JoinColumn()
     private Form form;
-
-    private String question;
 
     @OneToMany(mappedBy = "question")
     private Collection<Answer> answers;

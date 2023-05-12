@@ -12,41 +12,38 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bureaudeslegendes.api.dto.Question.QuestionCreationDTO;
 import com.bureaudeslegendes.api.model.Question;
-import com.bureaudeslegendes.api.repository.QuestionRepository;
+import com.bureaudeslegendes.api.service.QuestionService;
 
 @RequestMapping("/questions")
 @RestController
 public class QuestionController {
     @Autowired
-    private QuestionRepository questionRepository;
+    private QuestionService questionService;
 
     @GetMapping
     public List<Question> getQuestions() {
-        return questionRepository.findAll();
+        return questionService.getQuestions();
     }
 
     @GetMapping("/{id}")
     public Question getQuestion(@PathVariable Long id) {
-        return questionRepository.findById(id).orElseThrow(RuntimeException::new);
+        return questionService.getQuestion(id);
     }
 
     @PostMapping
-    public Question createQuestion(@RequestBody Question question) {
-        return questionRepository.save(question);
+    public Question createQuestion(@RequestBody QuestionCreationDTO questionCreationDTO) {
+        return questionService.createQuestion(questionCreationDTO);
     }
 
     @PutMapping("/{id}")
-    public Question updateQuestion(@PathVariable Long id, @RequestBody Question question) {
-        Question updateQuestion = questionRepository.findById(id).orElseThrow(RuntimeException::new);
-        updateQuestion.setForm(question.getForm());
-        updateQuestion.setQuestion(question.getQuestion());
-
-        return questionRepository.save(updateQuestion);
+    public Question updateQuestion(@PathVariable Long id, @RequestBody QuestionCreationDTO questionCreationDTO) {
+        return questionService.updateQuestion(id, questionCreationDTO);
     }
 
     @DeleteMapping("/{id}")
     public void deleteQuestion(@PathVariable Long id) {
-        questionRepository.deleteById(id);
+        questionService.deleteQuestion(id);
     }
 }

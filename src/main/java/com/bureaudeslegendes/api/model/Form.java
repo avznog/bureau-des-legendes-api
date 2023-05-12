@@ -25,16 +25,16 @@ public class Form {
 
     private FormType type;
 
-    @OneToMany(mappedBy = "form")
-    private Collection<Alert> alerts;
-    
     @ManyToOne()
     @JoinColumn()
     private Team team;
-    
+
     @ManyToOne()
     @JoinColumn()
     private Person creator;
+
+    @OneToMany(mappedBy = "form")
+    private Collection<Alert> alerts;
 
     @OneToMany(mappedBy = "form")
     private Collection<Question> questions;

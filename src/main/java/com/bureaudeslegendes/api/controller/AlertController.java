@@ -12,46 +12,38 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bureaudeslegendes.api.dto.Alert.AlertCreationDTO;
 import com.bureaudeslegendes.api.model.Alert;
-import com.bureaudeslegendes.api.repository.AlertRepository;
+import com.bureaudeslegendes.api.service.AlertService;
 
 @RequestMapping("/alerts")
 @RestController
 public class AlertController {
     @Autowired
-    private AlertRepository alertRepository;
+    private AlertService alertService;
 
     @GetMapping
     public List<Alert> getAlerts() {
-        return alertRepository.findAll();
+        return alertService.getAlerts();
     }
 
     @GetMapping("/{id}")
     public Alert getAlert(@PathVariable Long id) {
-        return alertRepository.findById(id).orElseThrow(RuntimeException::new);
+        return alertService.getAlert(id);
     }
 
     @PostMapping
-    public Alert createAlert(@RequestBody Alert alert) {
-        return alertRepository.save(alert);
+    public Alert createAlert(@RequestBody AlertCreationDTO alertCreationDTO) {
+        return alertService.createAlert(alertCreationDTO);
     }
 
     @PutMapping("/{id}")
-    public Alert updateAlert(@PathVariable Long id, @RequestBody Alert alert) {
-        Alert updateAlert = alertRepository.findById(id).orElseThrow(RuntimeException::new);
-        updateAlert.setCreationDate(alert.getCreationDate());
-        updateAlert.setFiller(alert.getFiller());
-        updateAlert.setReviewer(alert.getReviewer());
-        updateAlert.setForm(alert.getForm());
-        updateAlert.setAnonymous(alert.getAnonymous());
-        updateAlert.setSendMail(alert.getSendMail());
-        updateAlert.setStatus(alert.getStatus());
-
-        return alertRepository.save(updateAlert);
+    public Alert updateAlert(@PathVariable Long id, @RequestBody AlertCreationDTO alertCreationDTO) {
+        return alertService.updateAlert(id, alertCreationDTO);
     }
 
     @DeleteMapping("/{id}")
     public void deleteAlert(@PathVariable Long id) {
-        alertRepository.deleteById(id);
+        alertService.deleteAlert(id);
     }
 }

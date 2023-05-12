@@ -12,43 +12,38 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bureaudeslegendes.api.dto.Team.TeamCreationDTO;
 import com.bureaudeslegendes.api.model.Team;
-import com.bureaudeslegendes.api.repository.TeamRepository;
+import com.bureaudeslegendes.api.service.TeamService;
 
 @RequestMapping("/teams")
 @RestController
 public class TeamController {
     @Autowired
-    private TeamRepository teamRepository;
+    private TeamService teamService;
 
     @GetMapping
     public List<Team> getTeams() {
-        return teamRepository.findAll();
+        return teamService.getTeams();
     }
 
     @GetMapping("/{id}")
     public Team getTeam(@PathVariable Long id) {
-        return teamRepository.findById(id).orElseThrow(RuntimeException::new);
+        return teamService.getTeam(id);
     }
 
     @PostMapping
-    public Team createTeam(@RequestBody Team team) {
-        return teamRepository.save(team);
+    public Team createTeam(@RequestBody TeamCreationDTO teamCreationDTO) {
+        return teamService.createTeam(teamCreationDTO);
     }
 
     @PutMapping("/{id}")
-    public Team updateTeam(@PathVariable Long id, @RequestBody Team team) {
-        Team updateTeam = teamRepository.findById(id).orElseThrow(RuntimeException::new);
-        updateTeam.setName(team.getName());
-        updateTeam.setManager(team.getManager());
-        updateTeam.setRh(team.getRh());
-        updateTeam.setMembers(team.getMembers());
-
-        return teamRepository.save(updateTeam);
+    public Team updateTeam(@PathVariable Long id, @RequestBody TeamCreationDTO teamCreationDTO) {
+        return teamService.updateTeam(id, teamCreationDTO);
     }
 
     @DeleteMapping("/{id}")
     public void deleteTeam(@PathVariable Long id) {
-        teamRepository.deleteById(id);
+        teamService.deleteTeam(id);
     }
 }

@@ -12,44 +12,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bureaudeslegendes.api.dto.Form.FormCreationDTO;
 import com.bureaudeslegendes.api.model.Form;
-import com.bureaudeslegendes.api.repository.FormRepository;
+import com.bureaudeslegendes.api.service.FormService;
 
 @RequestMapping("/form")
 @RestController
 public class FormController {
     @Autowired
-    private FormRepository formRepository;
+    private FormService formService;
 
     @GetMapping
     public List<Form> getForms() {
-        return formRepository.findAll();
+        return formService.getForms();
     }
 
     @GetMapping("/{id}")
     public Form getForm(@PathVariable Long id) {
-        return formRepository.findById(id).orElseThrow(RuntimeException::new);
+        return formService.getForm(id);
     }
 
     @PostMapping
-    public Form createForm(@RequestBody Form formTemplate) {
-        return formRepository.save(formTemplate);
+    public Form createForm(@RequestBody FormCreationDTO formCreationDTO) {
+        return formService.createForm(formCreationDTO);
     }
 
     @PutMapping("/{id}")
     public Form updateForm(@PathVariable Long id,
-            @RequestBody Form formTemplate) {
-        Form updateForm = formRepository.findById(id).orElseThrow(RuntimeException::new);
-        updateForm.setCreationDate(formTemplate.getCreationDate());
-        updateForm.setType(formTemplate.getType());
-        updateForm.setTeam(formTemplate.getTeam());
-        updateForm.setCreator(formTemplate.getCreator());
-
-        return formRepository.save(updateForm);
+            @RequestBody FormCreationDTO formCreationDTO) {
+        return formService.updateForm(id, formCreationDTO);
     }
 
     @DeleteMapping("/{id}")
     public void deleteForm(@PathVariable Long id) {
-        formRepository.deleteById(id);
+        formService.deleteForm(id);
     }
 }

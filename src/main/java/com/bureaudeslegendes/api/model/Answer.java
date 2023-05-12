@@ -15,6 +15,8 @@ public class Answer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String answer;
+
     @ManyToOne()
     @JoinColumn()
     private Question question;
@@ -23,5 +25,4 @@ public class Answer {
     @JoinColumn()
     private Form form;
 
-    private String answer;
 }

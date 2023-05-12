@@ -12,42 +12,38 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bureaudeslegendes.api.dto.Answer.AnswerCreationDTO;
 import com.bureaudeslegendes.api.model.Answer;
-import com.bureaudeslegendes.api.repository.AnswerRepository;
+import com.bureaudeslegendes.api.service.AnswerService;
 
 @RequestMapping("/answers")
 @RestController
 public class AnswerController {
     @Autowired
-    private AnswerRepository answerRepository;
+    private AnswerService answerService;
 
     @GetMapping
     public List<Answer> getAnswers() {
-        return answerRepository.findAll();
+        return answerService.getAnswers();
     }
 
     @GetMapping("/{id}")
     public Answer getAnswer(@PathVariable Long id) {
-        return answerRepository.findById(id).orElseThrow(RuntimeException::new);
+        return answerService.getAnswer(id);
     }
 
     @PostMapping
-    public Answer createAnswer(@RequestBody Answer answer) {
-        return answerRepository.save(answer);
+    public Answer createAnswer(@RequestBody AnswerCreationDTO answerCreationDTO) {
+        return answerService.createAnswer(answerCreationDTO);
     }
 
     @PutMapping("/{id}")
-    public Answer updateAnswer(@PathVariable Long id, @RequestBody Answer answer) {
-        Answer updateAnswer = answerRepository.findById(id).orElseThrow(RuntimeException::new);
-        updateAnswer.setForm(answer.getForm());
-        updateAnswer.setQuestion(answer.getQuestion());
-        updateAnswer.setAnswer(answer.getAnswer());
-
-        return answerRepository.save(updateAnswer);
+    public Answer updateAnswer(@PathVariable Long id, @RequestBody AnswerCreationDTO answerCreationDTO) {
+        return answerService.updateAnswer(id, answerCreationDTO);
     }
 
     @DeleteMapping("/{id}")
     public void deleteAnswer(@PathVariable Long id) {
-        answerRepository.deleteById(id);
+        answerService.deleteAnswer(id);
     }
 }

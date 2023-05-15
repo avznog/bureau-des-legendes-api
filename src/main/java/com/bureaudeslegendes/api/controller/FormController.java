@@ -16,7 +16,7 @@ import com.bureaudeslegendes.api.dto.Form.FormCreationDTO;
 import com.bureaudeslegendes.api.model.Form;
 import com.bureaudeslegendes.api.service.FormService;
 
-@RequestMapping("/form")
+@RequestMapping("/forms")
 @RestController
 public class FormController {
     @Autowired

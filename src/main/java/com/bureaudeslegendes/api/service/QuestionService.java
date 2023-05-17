@@ -3,19 +3,22 @@ package com.bureaudeslegendes.api.service;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bureaudeslegendes.api.dto.Question.QuestionCreationDTO;
 import com.bureaudeslegendes.api.model.Question;
 import com.bureaudeslegendes.api.repository.QuestionRepository;
 
-@Service
-public class QuestionService {
-    ModelMapper mapper;
+import lombok.RequiredArgsConstructor;
 
-    @Autowired
-    private QuestionRepository questionRepository;
+@Service
+@RequiredArgsConstructor
+public class QuestionService {
+    final private ModelMapper mapper;
+
+    final private FormService formService;
+
+    final private QuestionRepository questionRepository;
 
     public List<Question> getQuestions() {
         return questionRepository.findAll();
@@ -27,6 +30,7 @@ public class QuestionService {
 
     public Question createQuestion(QuestionCreationDTO questionCreationDTO) {
         Question question = mapper.map(questionCreationDTO, Question.class);
+        question.setForm(formService.getForm(questionCreationDTO.getForm()));
         return questionRepository.save(question);
     }
 

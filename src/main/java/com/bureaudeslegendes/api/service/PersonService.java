@@ -3,7 +3,6 @@ package com.bureaudeslegendes.api.service;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bureaudeslegendes.api.dto.Person.PersonCreationDTO;
@@ -11,13 +10,16 @@ import com.bureaudeslegendes.api.dto.Person.PersonUpdateDTO;
 import com.bureaudeslegendes.api.model.Person;
 import com.bureaudeslegendes.api.repository.PersonRepository;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class PersonService {
+    final private ModelMapper mapper;
 
-    private ModelMapper mapper;
+    final private TeamService teamService;
 
-    @Autowired
-    private PersonRepository personRepository;
+    final private PersonRepository personRepository;
 
     public List<Person> getPeople() {
         return personRepository.findAll();
@@ -29,6 +31,7 @@ public class PersonService {
 
     public Person createPerson(PersonCreationDTO personCreationDTO) {
         Person person = mapper.map(personCreationDTO, Person.class);
+        person.setTeam(teamService.getTeam(personCreationDTO.getTeam()));
         return personRepository.save(person);
     }
 

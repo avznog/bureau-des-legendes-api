@@ -3,19 +3,24 @@ package com.bureaudeslegendes.api.service;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bureaudeslegendes.api.dto.Alert.AlertCreationDTO;
 import com.bureaudeslegendes.api.model.Alert;
 import com.bureaudeslegendes.api.repository.AlertRepository;
 
-@Service
-public class AlertService {
-    ModelMapper mapper;
+import lombok.RequiredArgsConstructor;
 
-    @Autowired
-    private AlertRepository alertRepository;
+@Service
+@RequiredArgsConstructor
+public class AlertService {
+    final private ModelMapper mapper;
+
+    final private PersonService personService;
+
+    final private FormService formService;
+
+    final private AlertRepository alertRepository;
 
     public List<Alert> getAlerts() {
         return alertRepository.findAll();
@@ -27,6 +32,9 @@ public class AlertService {
 
     public Alert createAlert(AlertCreationDTO alertCreationDTO) {
         Alert alert = mapper.map(alertCreationDTO, Alert.class);
+        alert.setFiller(personService.getPerson(alertCreationDTO.getFiller()));
+        alert.setReviewer(personService.getPerson(alertCreationDTO.getReviewer()));
+        alert.setForm(formService.getForm(alertCreationDTO.getForm()));
         return alertRepository.save(alert);
     }
 

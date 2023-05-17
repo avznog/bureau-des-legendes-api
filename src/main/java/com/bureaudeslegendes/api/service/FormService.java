@@ -3,19 +3,24 @@ package com.bureaudeslegendes.api.service;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bureaudeslegendes.api.dto.Form.FormCreationDTO;
 import com.bureaudeslegendes.api.model.Form;
 import com.bureaudeslegendes.api.repository.FormRepository;
 
-@Service
-public class FormService {
-    ModelMapper mapper;
+import lombok.RequiredArgsConstructor;
 
-    @Autowired
-    private FormRepository formRepository;
+@Service
+@RequiredArgsConstructor
+public class FormService {
+    final private ModelMapper mapper;
+
+    final private TeamService teamService;
+
+    final private PersonService personService;
+
+    final private FormRepository formRepository;
 
     public List<Form> getForms() {
         return formRepository.findAll();
@@ -27,6 +32,8 @@ public class FormService {
 
     public Form createForm(FormCreationDTO formCreationDTO) {
         Form form = mapper.map(formCreationDTO, Form.class);
+        form.setTeam(teamService.getTeam(formCreationDTO.getTeam()));
+        form.setCreator(personService.getPerson(formCreationDTO.getCreator()));
         return formRepository.save(form);
     }
 

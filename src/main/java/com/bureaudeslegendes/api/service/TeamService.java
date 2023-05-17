@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 public class TeamService {
     final private ModelMapper mapper;
 
-    final private PersonService personService;
+    // final private PersonService personService;
 
     final private TeamRepository teamRepository;
 
@@ -30,8 +30,8 @@ public class TeamService {
 
     public Team createTeam(TeamCreationDTO teamCreationDTO) {
         Team team = mapper.map(teamCreationDTO, Team.class);
-        team.setManager(personService.getPerson(teamCreationDTO.getManager()));
-        team.setRh(personService.getPerson(teamCreationDTO.getRh()));
+        // team.setManager(personService.getPerson(teamCreationDTO.getManager()));
+        // team.setRh(personService.getPerson(teamCreationDTO.getRh()));
         return teamRepository.save(team);
     }
 

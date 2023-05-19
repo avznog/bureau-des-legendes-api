@@ -2,9 +2,12 @@ spring:
   application:
     name: api
   datasource:
-    url: jdbc:postgresql://localhost:5432/bureaudeslegendes
-    username: ${DATABASE_USERNAME}
-    password: ${DATABASE_PASSWORD}
+    url: jdbc:${DATABASE_URL:postgresql://localhost:5432/devbdl}
+    username: ${DATABASE_USERNAME:postgres}
+    password: ${DATABASE_PASSWORD:postgres}
+  jpa:
+    hibernate:
+      ddl-auto: create
 
 server:
   port:

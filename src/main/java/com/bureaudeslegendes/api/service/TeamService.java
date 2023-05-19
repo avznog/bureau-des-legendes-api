@@ -3,19 +3,22 @@ package com.bureaudeslegendes.api.service;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bureaudeslegendes.api.dto.Team.TeamCreationDTO;
 import com.bureaudeslegendes.api.model.Team;
 import com.bureaudeslegendes.api.repository.TeamRepository;
 
-@Service
-public class TeamService {
-    private ModelMapper mapper;
+import lombok.RequiredArgsConstructor;
 
-    @Autowired
-    private TeamRepository teamRepository;
+@Service
+@RequiredArgsConstructor
+public class TeamService {
+    final private ModelMapper mapper;
+
+    // final private PersonService personService;
+
+    final private TeamRepository teamRepository;
 
     public List<Team> getTeams() {
         return teamRepository.findAll();
@@ -27,6 +30,8 @@ public class TeamService {
 
     public Team createTeam(TeamCreationDTO teamCreationDTO) {
         Team team = mapper.map(teamCreationDTO, Team.class);
+        // team.setManager(personService.getPerson(teamCreationDTO.getManager()));
+        // team.setRh(personService.getPerson(teamCreationDTO.getRh()));
         return teamRepository.save(team);
     }
 

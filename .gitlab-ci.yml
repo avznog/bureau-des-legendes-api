@@ -30,7 +30,4 @@ deploy:
     - echo "Deploying artifacts..."
     # Add commands to deploy your artifacts to the desired location (e.g., server, container registry)
 
-# Define artifacts for persistence between stages
-artifacts:
-  paths:
-    - target/*.jar
+

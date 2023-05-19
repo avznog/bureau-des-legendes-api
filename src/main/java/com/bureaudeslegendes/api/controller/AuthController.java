@@ -13,7 +13,7 @@ import com.bureaudeslegendes.api.dto.Login.ReturnLoginDTO;
 import com.bureaudeslegendes.api.model.Person;
 import com.bureaudeslegendes.api.service.AuthService;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000", "https://bureau-des-legendes.juniorisep.com"})
 @RequestMapping("/auth")
 @RestController
 public class AuthController {

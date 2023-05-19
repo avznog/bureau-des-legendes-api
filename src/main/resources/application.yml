@@ -2,7 +2,7 @@ spring:
   application:
     name: api
   datasource:
-    url: jdbc:${DATABASE_URL}
+    url: jdbc:${DATABASE_URL:postgresql://localhost:5432/bureaudeslegendes}
     username: ${DATABASE_USERNAME:postgres}
     password: ${DATABASE_PASSWORD:postgres}
 

@@ -30,6 +30,7 @@ public class AuthService {
       BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
       Person user = personRepository.findByEmail(loginDTO.getEmail()) ;
       if(encoder.matches(loginDTO.getPassword(), user.getPassword())) {
+        user.setPassword("");
         responseLoginDto.setPerson(user);
         responseLoginDto.setAuthorized(true);
         return responseLoginDto;

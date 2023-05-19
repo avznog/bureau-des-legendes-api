@@ -1,33 +1,10 @@
-# Define stages for the pipeline
-stages:
+stages: 
   - build
-  - test
-  - package
-  - deploy
 
-# Job: Build the project
-build:
+maven-build:
+  image: maven:3-jdk-11
   stage: build
-  script:
-    - mvn clean compile
-
-# Job: Run tests
-test:
-  stage: test
-  script:
-    - mvn test
-
-# Job: Package the project
-package:
-  stage: package
-  script:
-    - mvn package
-
-# Job: Deploy the artifacts
-deploy:
-  stage: deploy
-  script:
-    - echo "Deploying artifacts..."
-    # Add commands to deploy your artifacts to the desired location (e.g., server, container registry)
-
-
+  script: "mvn package -B"
+  artifacts:
+    paths:
+      - target/*.jar

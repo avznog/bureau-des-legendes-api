@@ -1,5 +1,6 @@
 stages: 
   - build
+  - docker
 
 maven-build:
   image: maven:3-openjdk-17
@@ -8,3 +9,8 @@ maven-build:
   artifacts:
     paths:
       - target/*.jar
+
+docker-build:
+  stage: docker
+  script:
+  - docker build -t registry.dev.juniorisep.com/bureau-des-legendes/api:test .

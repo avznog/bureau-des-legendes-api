@@ -12,5 +12,6 @@ maven-build:
 
 docker-build:
   stage: docker
+  image: docker:latest
   script:
   - docker build -t registry.dev.juniorisep.com/bureau-des-legendes/api:test .

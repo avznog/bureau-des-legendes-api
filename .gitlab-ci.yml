@@ -1,0 +1,36 @@
+# Define stages for the pipeline
+stages:
+  - build
+  - test
+  - package
+  - deploy
+
+# Job: Build the project
+build:
+  stage: build
+  script:
+    - mvn clean compile
+
+# Job: Run tests
+test:
+  stage: test
+  script:
+    - mvn test
+
+# Job: Package the project
+package:
+  stage: package
+  script:
+    - mvn package
+
+# Job: Deploy the artifacts
+deploy:
+  stage: deploy
+  script:
+    - echo "Deploying artifacts..."
+    # Add commands to deploy your artifacts to the desired location (e.g., server, container registry)
+
+# Define artifacts for persistence between stages
+artifacts:
+  paths:
+    - target/*.jar

@@ -3,6 +3,7 @@ package com.bureaudeslegendes.api.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bureaudeslegendes.api.dto.Person.PersonCreationDTO;
@@ -17,6 +19,7 @@ import com.bureaudeslegendes.api.dto.Person.PersonUpdateDTO;
 import com.bureaudeslegendes.api.model.Person;
 import com.bureaudeslegendes.api.service.PersonService;
 
+@CrossOrigin(origins = {"http://localhost:3000", "https://bureau-des-legendes.juniorisep.com"})
 @RequestMapping("/persons")
 @RestController
 public class PersonController {
@@ -46,5 +49,10 @@ public class PersonController {
     @DeleteMapping("/{id}")
     public void deletePerson(@PathVariable Long id) {
         personService.deletePerson(id);
+    }
+
+    @GetMapping("/set-team")
+    public Person setTeam(@RequestParam Long teamId, @RequestParam Long personId) {
+        return personService.setTeam(personId, teamId);
     }
 }

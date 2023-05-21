@@ -9,6 +9,7 @@ import com.bureaudeslegendes.api.dto.Person.PersonCreationDTO;
 import com.bureaudeslegendes.api.dto.Person.PersonUpdateDTO;
 import com.bureaudeslegendes.api.model.Person;
 import com.bureaudeslegendes.api.repository.PersonRepository;
+import com.bureaudeslegendes.api.repository.TeamRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,6 +19,8 @@ public class PersonService {
     final private ModelMapper mapper;
 
     final private PersonRepository personRepository;
+
+    final private TeamRepository teamRepository;
 
     public List<Person> getPeople() {
         return personRepository.findAll();
@@ -40,5 +43,12 @@ public class PersonService {
 
     public void deletePerson(Long id) {
         personRepository.deleteById(id);
+    }
+
+    public Person setTeam(Long personId, Long teamId) {
+        Person person = personRepository.findById(personId).get();
+        person.setTeam(teamRepository.findById(teamId).get());
+        personRepository.save(person);
+        return person;   
     }
 }

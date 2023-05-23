@@ -3,6 +3,7 @@ package com.bureaudeslegendes.api.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import com.bureaudeslegendes.api.dto.Team.TeamCreationDTO;
 import com.bureaudeslegendes.api.model.Team;
 import com.bureaudeslegendes.api.service.TeamService;
 
+@CrossOrigin(origins = {"http://localhost:3000", "https://bureau-des-legendes.juniorisep.com"})
 @RequestMapping("/teams")
 @RestController
 public class TeamController {
@@ -45,5 +47,10 @@ public class TeamController {
     @DeleteMapping("/{id}")
     public void deleteTeam(@PathVariable Long id) {
         teamService.deleteTeam(id);
+    }
+
+    @GetMapping("/by-member-id/{membersId}")
+    public Team findByMembersId(@PathVariable Long membersId) {
+        return teamService.findByMembersId(membersId);
     }
 }

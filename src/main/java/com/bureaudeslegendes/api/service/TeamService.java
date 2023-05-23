@@ -6,7 +6,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import com.bureaudeslegendes.api.dto.Team.TeamCreationDTO;
+import com.bureaudeslegendes.api.model.Person;
 import com.bureaudeslegendes.api.model.Team;
+import com.bureaudeslegendes.api.repository.PersonRepository;
 import com.bureaudeslegendes.api.repository.TeamRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -16,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 public class TeamService {
     final private ModelMapper mapper;
 
-    // final private PersonService personService;
+    final private PersonRepository personRepository;
 
     final private TeamRepository teamRepository;
 
@@ -30,9 +32,17 @@ public class TeamService {
 
     public Team createTeam(TeamCreationDTO teamCreationDTO) {
         Team team = mapper.map(teamCreationDTO, Team.class);
-        // team.setManager(personService.getPerson(teamCreationDTO.getManager()));
-        // team.setRh(personService.getPerson(teamCreationDTO.getRh()));
-        return teamRepository.save(team);
+        team.setManager(personRepository.findById(teamCreationDTO.getManager()).get());
+        team.setRh(personRepository.findById(teamCreationDTO.getRh()).get());
+        Team teamCreated = teamRepository.save(team);
+        Person manager = personRepository.findById(teamCreationDTO.getManager()).get();
+        Person rh = personRepository.findById(teamCreationDTO.getRh()).get();
+        rh.setTeam(teamCreated);
+        manager.setTeam(teamCreated);
+        personRepository.save(rh);
+        personRepository.save(manager);
+        return teamCreated;
+        
     }
 
     public Team updateTeam(Long id, TeamCreationDTO teamCreationDTO) {
@@ -43,5 +53,9 @@ public class TeamService {
 
     public void deleteTeam(Long id) {
         teamRepository.deleteById(id);
+    }
+
+    public Team findByMembersId(Long membersId) {
+        return teamRepository.findByMembersId(membersId);
     }
 }

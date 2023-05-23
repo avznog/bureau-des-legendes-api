@@ -1,5 +1,6 @@
 package com.bureaudeslegendes.api.controller;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,5 +55,10 @@ public class PersonController {
     @GetMapping("/set-team")
     public Person setTeam(@RequestParam Long teamId, @RequestParam Long personId) {
         return personService.setTeam(personId, teamId);
+    }
+
+    @GetMapping("/all-free-rh")
+    public Collection<Person> getAllFreeRh() {
+        return personService.getAllFreeRh();
     }
 }

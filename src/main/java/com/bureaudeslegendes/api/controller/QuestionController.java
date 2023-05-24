@@ -32,6 +32,11 @@ public class QuestionController {
         return questionService.getQuestion(id);
     }
 
+    @GetMapping("/form/{formId}")
+    public List<Question> getQuestionsByForm(@PathVariable Long formId) {
+        return questionService.getQuestionsByForm(formId);
+    }
+
     @PostMapping
     public Question createQuestion(@RequestBody QuestionCreationDTO questionCreationDTO) {
         return questionService.createQuestion(questionCreationDTO);

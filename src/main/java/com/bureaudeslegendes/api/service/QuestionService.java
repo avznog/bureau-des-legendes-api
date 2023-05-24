@@ -6,7 +6,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import com.bureaudeslegendes.api.dto.Question.QuestionCreationDTO;
+import com.bureaudeslegendes.api.model.Form;
 import com.bureaudeslegendes.api.model.Question;
+import com.bureaudeslegendes.api.repository.FormRepository;
 import com.bureaudeslegendes.api.repository.QuestionRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,8 @@ public class QuestionService {
 
     final private FormService formService;
 
+    final private FormRepository formRepository;
+
     final private QuestionRepository questionRepository;
 
     public List<Question> getQuestions() {
@@ -26,6 +30,12 @@ public class QuestionService {
 
     public Question getQuestion(Long id) {
         return questionRepository.findById(id).orElseThrow();
+    }
+
+    public List<Question> getQuestionsByForm(Long formId) {
+        Form form = formRepository.findById(formId).get();
+        return questionRepository.findByForm(form);
+
     }
 
     public Question createQuestion(QuestionCreationDTO questionCreationDTO) {

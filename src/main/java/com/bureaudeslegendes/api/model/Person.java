@@ -3,12 +3,13 @@ package com.bureaudeslegendes.api.model;
 import java.util.Collection;
 
 import com.bureaudeslegendes.api.enumList.Role;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
@@ -34,8 +35,9 @@ public class Person {
 
     private String photo;
     
+    @JsonIgnore
     @ManyToOne()
-    @JsonBackReference
+    @JoinColumn()
     private Team team;
 
     @OneToMany(mappedBy = "filler")

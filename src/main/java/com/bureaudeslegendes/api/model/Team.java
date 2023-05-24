@@ -3,7 +3,6 @@ package com.bureaudeslegendes.api.model;
 import java.util.Collection;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,7 +30,6 @@ public class Team {
     @JoinColumn()
     private Person rh;
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "team")
     private Collection<Person> members;
 

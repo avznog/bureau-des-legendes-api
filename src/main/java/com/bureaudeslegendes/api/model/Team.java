@@ -2,6 +2,7 @@ package com.bureaudeslegendes.api.model;
 
 import java.util.Collection;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
@@ -34,6 +35,7 @@ public class Team {
     @OneToMany(mappedBy = "team")
     private Collection<Person> members;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "team")
     private Collection<Form> forms;
 }

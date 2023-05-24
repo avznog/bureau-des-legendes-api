@@ -3,6 +3,7 @@ package com.bureaudeslegendes.api.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import com.bureaudeslegendes.api.dto.Form.FormCreationDTO;
 import com.bureaudeslegendes.api.model.Form;
 import com.bureaudeslegendes.api.service.FormService;
 
+@CrossOrigin(origins = { "http://localhost:3000", "https://bureau-des-legendes.juniorisep.com" })
 @RequestMapping("/forms")
 @RestController
 public class FormController {
@@ -32,7 +34,7 @@ public class FormController {
         return formService.getForm(id);
     }
 
-    @GetMapping("/team/{id}")
+    @GetMapping("/team/{teamId}")
     public List<Form> getFormsByTeam(@PathVariable Long teamId) {
         return formService.getFormsByTeam(teamId);
     }

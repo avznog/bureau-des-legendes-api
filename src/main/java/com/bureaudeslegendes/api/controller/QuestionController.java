@@ -1,5 +1,6 @@
 package com.bureaudeslegendes.api.controller;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +33,9 @@ public class QuestionController {
         return questionService.getQuestion(id);
     }
 
-    @GetMapping("/form/{formId}")
-    public List<Question> getQuestionsByForm(@PathVariable Long formId) {
-        return questionService.getQuestionsByForm(formId);
+    @GetMapping("/form/{id}")
+    public Collection<Question> getQuestionsByFormId(@PathVariable Long id) {
+        return questionService.getQuestionsByFormId(id);
     }
 
     @PostMapping

@@ -3,10 +3,9 @@ package com.bureaudeslegendes.api.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.bureaudeslegendes.api.model.Form;
-import com.bureaudeslegendes.api.model.Team;
 
-import java.util.List;
+import java.util.Collection;
 
 public interface FormRepository extends JpaRepository<Form, Long> {
-    List<Form> findByTeam(Team team);
+    Collection<Form> findByTeamId(Long id);
 }

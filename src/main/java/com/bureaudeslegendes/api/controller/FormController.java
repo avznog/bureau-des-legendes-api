@@ -1,5 +1,6 @@
 package com.bureaudeslegendes.api.controller;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +35,9 @@ public class FormController {
         return formService.getForm(id);
     }
 
-    @GetMapping("/team/{teamId}")
-    public List<Form> getFormsByTeam(@PathVariable Long teamId) {
-        return formService.getFormsByTeam(teamId);
+    @GetMapping("/team/{id}")
+    public Collection<Form> getFormsByTeamId(@PathVariable Long id) {
+        return formService.getFormsByTeamId(id);
     }
 
     @PostMapping

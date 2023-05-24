@@ -32,9 +32,9 @@ public class AnswerController {
         return answerService.getAnswer(id);
     }
 
-    @GetMapping("/question/{questionId}")
-    public Answer getAnswerByQuestion(@PathVariable Long questionId) {
-        return answerService.getAnswerByQuestion(questionId);
+    @GetMapping("/question/{id}")
+    public Answer getAnswerByQuestionId(@PathVariable Long id) {
+        return answerService.getAnswerByQuestionId(id);
     }
 
     @PostMapping

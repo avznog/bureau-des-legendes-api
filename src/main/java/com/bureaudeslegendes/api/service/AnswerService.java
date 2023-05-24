@@ -30,6 +30,10 @@ public class AnswerService {
         return answerRepository.findById(id).orElseThrow();
     }
 
+    public Answer getAnswerByQuestionId(Long id) {
+        return answerRepository.findByQuestionId(id);
+    }
+
     public Answer createAnswer(AnswerCreationDTO answerCreationDTO) {
         Answer answer = mapper.map(answerCreationDTO, Answer.class);
         answer.setQuestion(questionService.getQuestion(answerCreationDTO.getQuestion()));

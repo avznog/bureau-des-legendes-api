@@ -2,9 +2,9 @@ spring:
   application:
     name: api
   datasource:
-    url: jdbc:${DATABASE_URL:postgresql://localhost:5432/devbdl}
+    url: jdbc:${DATABASE_URL:postgresql://localhost:5432/bureaudeslegendes}
     username: ${DATABASE_USERNAME:postgres}
-    password: ${DATABASE_PASSWORD:postgres}
+    password: ${DATABASE_PASSWORD:R0xwe331SEoZoYa}
   jpa:
     hibernate:
       ddl-auto: update
@@ -13,5 +13,4 @@ spring:
   #     ddl-auto: create
 
 server:
-  port:
-    8000
+  port: 8000

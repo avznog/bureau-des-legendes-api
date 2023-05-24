@@ -1,5 +1,6 @@
 package com.bureaudeslegendes.api.service;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -26,6 +27,11 @@ public class QuestionService {
 
     public Question getQuestion(Long id) {
         return questionRepository.findById(id).orElseThrow();
+    }
+
+    public Collection<Question> getQuestionsByFormId(Long id) {
+        return questionRepository.findByFormId(id);
+
     }
 
     public Question createQuestion(QuestionCreationDTO questionCreationDTO) {

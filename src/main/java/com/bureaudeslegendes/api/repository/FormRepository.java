@@ -4,6 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.bureaudeslegendes.api.model.Form;
 
-public interface FormRepository extends JpaRepository<Form, Long> {
+import java.util.Collection;
 
+public interface FormRepository extends JpaRepository<Form, Long> {
+    Collection<Form> findByTeamId(Long id);
 }

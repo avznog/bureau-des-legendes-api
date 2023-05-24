@@ -1,5 +1,6 @@
 package com.bureaudeslegendes.api.service;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -28,6 +29,10 @@ public class FormService {
 
     public Form getForm(Long id) {
         return formRepository.findById(id).orElseThrow();
+    }
+
+    public Collection<Form> getFormsByTeamId(Long id) {
+        return formRepository.findByTeamId(id);
     }
 
     public Form createForm(FormCreationDTO formCreationDTO) {

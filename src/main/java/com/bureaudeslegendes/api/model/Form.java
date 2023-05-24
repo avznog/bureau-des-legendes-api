@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.Collection;
 
 import com.bureaudeslegendes.api.enumList.FormType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,18 +28,23 @@ public class Form {
 
     @ManyToOne()
     @JoinColumn()
+    @JsonIgnore
     private Team team;
 
     @ManyToOne()
     @JoinColumn()
+    @JsonIgnore
     private Person creator;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "form")
     private Collection<Alert> alerts;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "form")
     private Collection<Question> questions;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "form")
     private Collection<Answer> answers;
 }

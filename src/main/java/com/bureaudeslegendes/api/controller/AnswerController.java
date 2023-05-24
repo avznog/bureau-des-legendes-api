@@ -32,6 +32,11 @@ public class AnswerController {
         return answerService.getAnswer(id);
     }
 
+    @GetMapping("/question/{questionId}")
+    public Answer getAnswerByQuestion(@PathVariable Long questionId) {
+        return answerService.getAnswerByQuestion(questionId);
+    }
+
     @PostMapping
     public Answer createAnswer(@RequestBody AnswerCreationDTO answerCreationDTO) {
         return answerService.createAnswer(answerCreationDTO);

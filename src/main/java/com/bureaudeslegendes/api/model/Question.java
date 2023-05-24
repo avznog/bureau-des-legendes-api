@@ -2,6 +2,8 @@ package com.bureaudeslegendes.api.model;
 
 import java.util.Collection;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,6 +26,7 @@ public class Question {
     @JoinColumn()
     private Form form;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "question")
     private Collection<Answer> answers;
 }

@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.bureaudeslegendes.api.dto.Answer.AnswerCreationDTO;
 import com.bureaudeslegendes.api.model.Answer;
+import com.bureaudeslegendes.api.model.Question;
 import com.bureaudeslegendes.api.repository.AnswerRepository;
+import com.bureaudeslegendes.api.repository.QuestionRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,6 +19,8 @@ public class AnswerService {
     final private ModelMapper mapper;
 
     final private QuestionService questionService;
+
+    final private QuestionRepository questionRepository;
 
     final private FormService formService;
 
@@ -28,6 +32,11 @@ public class AnswerService {
 
     public Answer getAnswer(Long id) {
         return answerRepository.findById(id).orElseThrow();
+    }
+
+    public Answer getAnswerByQuestion(Long questionId) {
+        Question question = questionRepository.findById(questionId).get();
+        return answerRepository.findByQuestion(question);
     }
 
     public Answer createAnswer(AnswerCreationDTO answerCreationDTO) {

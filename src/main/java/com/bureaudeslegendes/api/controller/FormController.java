@@ -32,6 +32,11 @@ public class FormController {
         return formService.getForm(id);
     }
 
+    @GetMapping("/team/{id}")
+    public List<Form> getFormsByTeam(@PathVariable Long teamId) {
+        return formService.getFormsByTeam(teamId);
+    }
+
     @PostMapping
     public Form createForm(@RequestBody FormCreationDTO formCreationDTO) {
         return formService.createForm(formCreationDTO);

@@ -30,6 +30,7 @@ public class Team {
     @JoinColumn()
     private Person rh;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "team")
     private Collection<Person> members;
 

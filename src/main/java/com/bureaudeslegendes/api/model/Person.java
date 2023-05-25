@@ -3,7 +3,6 @@ package com.bureaudeslegendes.api.model;
 import java.util.Collection;
 
 import com.bureaudeslegendes.api.enumList.Role;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,8 +33,7 @@ public class Person {
     private String phone;
 
     private String photo;
-    
-    @JsonIgnore
+
     @ManyToOne()
     @JoinColumn()
     private Team team;

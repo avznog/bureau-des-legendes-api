@@ -16,4 +16,6 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
   Optional<Person> findById(Long id);
 
   Collection<Person> findAllByRole(Role role);
+
+  Person findByTeamIdAndRole(Long teamId, Role role);
 }

@@ -3,6 +3,7 @@ package com.bureaudeslegendes.api.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import com.bureaudeslegendes.api.dto.Alert.AlertCreationDTO;
 import com.bureaudeslegendes.api.model.Alert;
 import com.bureaudeslegendes.api.service.AlertService;
 
+@CrossOrigin(origins = {"http://localhost:3000", "https://bureau-des-legendes.juniorisep.com"})
 @RequestMapping("/alerts")
 @RestController
 public class AlertController {

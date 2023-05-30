@@ -6,7 +6,7 @@ import lombok.Data;
 public class AnswerCreationDTO {
     private String answer;
 
-    private Long question;
+    private Long questionId;
 
-    private Long form;
+    private Long formId;
 }

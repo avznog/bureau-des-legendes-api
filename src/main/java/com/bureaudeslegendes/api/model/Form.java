@@ -28,23 +28,18 @@ public class Form {
 
     @ManyToOne()
     @JoinColumn()
-    @JsonIgnore
     private Team team;
 
     @ManyToOne()
     @JoinColumn()
-    @JsonIgnore
     private Person creator;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "form")
     private Collection<Alert> alerts;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "form")
     private Collection<Question> questions;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "form")
     private Collection<Answer> answers;
 }

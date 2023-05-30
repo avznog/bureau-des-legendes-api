@@ -36,8 +36,8 @@ public class AnswerService {
 
     public Answer createAnswer(AnswerCreationDTO answerCreationDTO) {
         Answer answer = mapper.map(answerCreationDTO, Answer.class);
-        answer.setQuestion(questionService.getQuestion(answerCreationDTO.getQuestion()));
-        answer.setForm(formService.getForm(answerCreationDTO.getForm()));
+        answer.setQuestion(questionService.getQuestion(answerCreationDTO.getQuestionId()));
+        answer.setForm(formService.getForm(answerCreationDTO.getFormId()));
         return answerRepository.save(answer);
     }
 
@@ -49,5 +49,12 @@ public class AnswerService {
 
     public void deleteAnswer(Long id) {
         answerRepository.deleteById(id);
+    }
+
+    public void createAnswersAndAlert(List<AnswerCreationDTO> createAnswersAndAlertDTOs) {
+        createAnswersAndAlertDTOs.forEach(answer -> {
+            Answer newAnswer = mapper.map(answer, Answer.class);
+            answerRepository.save(newAnswer);
+        });
     }
 }

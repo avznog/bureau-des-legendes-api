@@ -2,7 +2,9 @@ package com.bureaudeslegendes.api.model;
 
 import java.util.Collection;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,6 +17,10 @@ import lombok.Data;
 
 @Data
 @Entity
+@JsonIdentityInfo(
+    generator = ObjectIdGenerators.PropertyGenerator.class,
+    property = "id"
+)
 public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +39,6 @@ public class Team {
     @OneToMany(mappedBy = "team")
     private Collection<Person> members;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "team")
     private Collection<Form> forms;
 }

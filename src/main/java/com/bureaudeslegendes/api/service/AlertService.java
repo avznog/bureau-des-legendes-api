@@ -1,5 +1,6 @@
 package com.bureaudeslegendes.api.service;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -28,6 +29,14 @@ public class AlertService {
 
     public Alert getAlert(Long id) {
         return alertRepository.findById(id).orElseThrow();
+    }
+
+    public Collection<Alert> getAlertsByReviewer(Long id) {
+        return alertRepository.findByReviewerId(id);
+    }
+
+    public Collection<Alert> getAlertsByFiller(Long id) {
+        return alertRepository.findByReviewerId(id);
     }
 
     public Alert createAlert(AlertCreationDTO alertCreationDTO) {

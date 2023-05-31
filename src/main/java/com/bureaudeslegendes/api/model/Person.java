@@ -34,15 +34,17 @@ public class Person {
     private String phone;
 
     private String photo;
-    
+
     @JsonIgnore
     @ManyToOne()
     @JoinColumn()
     private Team team;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "filler")
     private Collection<Alert> filledAlerts;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "reviewer")
     private Collection<Alert> reviewedAlerts;
 

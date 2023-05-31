@@ -1,5 +1,6 @@
 package com.bureaudeslegendes.api.controller;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,16 @@ public class AlertController {
     @GetMapping("/{id}")
     public Alert getAlert(@PathVariable Long id) {
         return alertService.getAlert(id);
+    }
+
+    @GetMapping("/reviewer/{id}")
+    public Collection<Alert> getAlertsByReviewer(@PathVariable Long id) {
+        return alertService.getAlertsByReviewer(id);
+    }
+
+    @GetMapping("/filler/{id}")
+    public Collection<Alert> getAlertsByFiller(@PathVariable Long id) {
+        return alertService.getAlertsByFiller(id);
     }
 
     @PostMapping

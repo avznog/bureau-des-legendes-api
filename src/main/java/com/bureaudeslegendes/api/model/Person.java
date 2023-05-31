@@ -3,8 +3,7 @@ package com.bureaudeslegendes.api.model;
 import java.util.Collection;
 
 import com.bureaudeslegendes.api.enumList.Role;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,10 +16,6 @@ import lombok.Data;
 
 @Data
 @Entity
-@JsonIdentityInfo(
-    generator = ObjectIdGenerators.PropertyGenerator.class,
-    property = "id"
-)
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,6 +37,7 @@ public class Person {
     
     @ManyToOne()
     @JoinColumn()
+    @JsonBackReference
     private Team team;
 
     @OneToMany(mappedBy = "filler")
